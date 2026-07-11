@@ -59,11 +59,11 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {stage === "locked" && (
+      {/* {stage === "locked" && (
         <PasswordGate onUnlock={() => setStage("unlocked")} />
-      )}
+      )} */}
 
-      {stage === "unlocked" && (
+      {/* {stage === "unlocked" && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -72,7 +72,7 @@ export default function Home() {
           <StepFlow steps={steps} />
           <MusicPlayer />
         </motion.div>
-      )}
+      )} */}
     </main>
   );
 }
