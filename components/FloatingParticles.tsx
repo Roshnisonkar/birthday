@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface FloatingParticlesProps {
@@ -28,16 +28,26 @@ export default function FloatingParticles({
   variant = "particles",
   className = "",
 }: FloatingParticlesProps) {
-  const particles = useMemo<Particle[]>(() => {
-    return Array.from({ length: count }).map((_, i) => ({
-      id: i,
-      size: variant === "stars" ? Math.random() * 2 + 1 : Math.random() * 4 + 2,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      duration: Math.random() * 8 + 6,
-      delay: Math.random() * 6,
-      opacity: Math.random() * 0.5 + 0.3,
-    }));
+  // Particles are generated client-side only (after mount) so the server
+  // render and the client's first render match exactly. Generating random
+  // values with Math.random() inside render/useMemo runs on the server too,
+  // producing different numbers than the client and causing a hydration
+  // mismatch. Starting from an empty array on both server and client, then
+  // filling it in on the client after mount, sidesteps that entirely.
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: count }).map((_, i) => ({
+        id: i,
+        size: variant === "stars" ? Math.random() * 2 + 1 : Math.random() * 4 + 2,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 8 + 6,
+        delay: Math.random() * 6,
+        opacity: Math.random() * 0.5 + 0.3,
+      }))
+    );
   }, [count, variant]);
 
   return (
