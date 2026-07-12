@@ -1,11 +1,6 @@
 "use client";
 
 import { useRef, useState, MouseEvent } from "react";
-
-/**
- * Gives an element a subtle magnetic pull toward the cursor on hover.
- * Attach `ref` to the element and spread `handlers` onto it.
- */
 export function useMagnetic(strength = 0.35) {
   const ref = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
