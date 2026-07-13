@@ -25,7 +25,7 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Happy Birthday, My Dearest Anshu",
+  title: "Happy Birthday, My Dearest Sister",
   description:
     "A private, cinematic birthday celebration built with love — memories, letters, wishes, and a little bit of magic, just for her.",
   robots: {
